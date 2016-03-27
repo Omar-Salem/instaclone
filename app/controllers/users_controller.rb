@@ -14,16 +14,18 @@ class UsersController < ApplicationController
     userId=response["data"]["id"]
     customUser= CustomToken.new(userId, token)
     custom_token = customUser.create_token
-    # arr= CustomToken.validate_token(custom_token)
-    # if arr[0]
-    #   puts "zoko:"+ arr[1].to_s
-    # end
+    puts "custom_token:"+custom_token
     render text: custom_token
   end
 
   def sync_media
-    token = params["token"]
-    url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=#{token}"
+    custom_token = request.headers['token']
+    arr= CustomToken.validate_token(custom_token)
+    unless arr[0]
+      render :status => 400
+    end
+
+    url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=#{arr[1]["token"]}"
     response = HTTParty.get(url, :verify => false)
     response["data"].each do |item|
       next if item["type"]!="image"

@@ -14,17 +14,19 @@ angular.module('controllers').controller(
                     'Accept': 'text/plain'
                 }
             }).then(function (response) {
-                alert(response.data);
+                localStorage.setItem("token", response.data);
+                sync_media()
             }, function (response) {
                 alert('error')
             });
         }
 
         function sync_media() {
-            $http.post('/users/sync_media', {token: token}, {
+            $http.post('/users/sync_media', {}, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'token': localStorage.getItem("token")
                 }
             }).then(function (response) {
                 alert(response.data)

@@ -31,8 +31,8 @@ class CustomToken
 
   def create_token
     json= self.to_json
-    plain = Base64.encode64(json)
-    hashed = Base64.encode64(self.class.compute_hash(json))
+    plain = Base64.strict_encode64(json)
+    hashed = Base64.strict_encode64(self.class.compute_hash(json))
     return plain+SEPERATOR+hashed
   end
 
