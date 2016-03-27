@@ -10,10 +10,15 @@ class UsersController < ApplicationController
   def get_user_details
     token = params["token"]
     userDetailsUrl = "https://api.instagram.com/v1/users/self/?access_token=#{token}"
-    puts userDetailsUrl
     response = HTTParty.get(userDetailsUrl, :verify => false)
     userId=response["data"]["id"]
-    render text: userId
+    customUser= CustomToken.new(userId, token)
+    custom_token = customUser.create_token
+    # arr= CustomToken.validate_token(custom_token)
+    # if arr[0]
+    #   puts "zoko:"+ arr[1].to_s
+    # end
+    render text: custom_token
   end
 
   def sync_media

@@ -106,6 +106,7 @@ GEM
     rake (11.1.1)
     rdoc (4.2.2)
       json (~> 1.4)
+    ruby-hmac (0.4.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -139,6 +140,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   mysql2 (>= 0.3.13, < 0.5)
   rails (= 4.2.6)
+  ruby-hmac (~> 0.4.0)
   sdoc (~> 0.4.0)
   turbolinks
   tzinfo-data

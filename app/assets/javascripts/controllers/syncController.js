@@ -11,10 +11,10 @@ angular.module('controllers').controller(
             $http.post('/users/get_user_details', {token: token}, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'text/plain'
                 }
             }).then(function (response) {
-                alert(response.data)
+                alert(response.data);
             }, function (response) {
                 alert('error')
             });
