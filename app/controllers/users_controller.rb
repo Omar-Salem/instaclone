@@ -1,15 +1,26 @@
+require "rubygems"
+require "httparty"
+
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+  def callback
+  end
 
   def sync_media
-    # url = request.original_url
-    # idx=url.index('=')
-    # @token=url[idx..-1]
-    @token=request.original_url
+    token = params["token"]
+    url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=#{token}"
+    response = HTTParty.get(url, :verify => false)
+    puts response
+    render json: response["data"]
+
   end
 
   def get
-    u= User.new
-    u.handle="koko"
-    render json: u
+    # Rails.logger.debug "My debug log jhjhjj"
+    # puts "13246579"
+    # u= User.new
+    # u.handle="koko"
+    # render json: u
   end
 end
