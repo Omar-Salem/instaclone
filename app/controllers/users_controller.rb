@@ -7,6 +7,15 @@ class UsersController < ApplicationController
   def callback
   end
 
+  def get_user_details
+    token = params["token"]
+    userDetailsUrl = "https://api.instagram.com/v1/users/self/?access_token=#{token}"
+    puts userDetailsUrl
+    response = HTTParty.get(userDetailsUrl, :verify => false)
+    userId=response["data"]["id"]
+    render text: userId
+  end
+
   def sync_media
     token = params["token"]
     url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=#{token}"
@@ -20,6 +29,7 @@ class UsersController < ApplicationController
 
   end
 
+  private
   def save_img(imgId, imgDictionary, userId)
     puts "imgId is "+imgId
 

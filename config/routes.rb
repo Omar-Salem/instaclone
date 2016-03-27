@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   get 'users/get' => 'users#get'
   get 'users/callback' => 'users#callback'
+  post 'users/get_user_details' => 'users#get_user_details'
   post 'users/sync_media' => 'users#sync_media'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
