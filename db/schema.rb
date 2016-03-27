@@ -11,12 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325235552) do
+ActiveRecord::Schema.define(version: 20160327092633) do
 
-  create_table "users", force: :cascade do |t|
-    t.string   "handle",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "images", force: :cascade do |t|
+    t.string   "img_id",              limit: 255, null: false
+    t.string   "low_resolution",      limit: 255, null: false
+    t.string   "thumbnail",           limit: 255, null: false
+    t.string   "standard_resolution", limit: 255, null: false
+    t.string   "user_id",             limit: 255, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "href",                limit: 255
   end
+
+  add_index "images", ["img_id"], name: "index_images_on_img_id", unique: true, using: :btree
 
 end
