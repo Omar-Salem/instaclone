@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327092633) do
+ActiveRecord::Schema.define(version: 20160328000208) do
+
+  create_table "access_tokens", force: :cascade do |t|
+    t.string   "token",      limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "access_tokens", ["token"], name: "index_access_tokens_on_token", unique: true, using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "img_id",              limit: 255, null: false
@@ -25,5 +33,6 @@ ActiveRecord::Schema.define(version: 20160327092633) do
   end
 
   add_index "images", ["img_id"], name: "index_images_on_img_id", unique: true, using: :btree
+  add_index "images", ["user_id"], name: "index_images_on_user_id", using: :btree
 
 end

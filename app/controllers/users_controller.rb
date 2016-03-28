@@ -2,59 +2,30 @@ require "rubygems"
 require "httparty"
 
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
   def callback
   end
 
-  # def get_user_details
-  #   token = params["token"]
-  #   userDetailsUrl = "https://api.instagram.com/v1/users/self/?access_token=#{token}"
-  #   response = HTTParty.get(userDetailsUrl, :verify => false)
-  #   userId=response["data"]["id"]
-  #   customUser= CustomToken.new(userId, token)
-  #   custom_token = customUser.create_token
-  #   puts "custom_token:"+custom_token
-  #   render text: custom_token
-  # end
+  def get_user_details
+    token = params["token"]
 
-  def sync_media
-    token = request.headers['token']
-    # arr= CustomToken.validate_token(custom_token)
-    # unless arr[0]
-    #   render :status => 400
-    # end
+    AccessToken.create(token: token)
 
-    url = "https://api.instagram.com/v1/users/self/media/recent/?access_token=#{token}"
-    response = HTTParty.get(url, :verify => false)
-    response["data"].each do |item|
-      next if item["type"]!="image"
-      userId="omar salem"
-      save_img(item["id"], item["images"], item["user"]["id"])
-    end
-    render json: response["data"]
-
+    custom_user = get_custom_user(token)
+    render text: custom_user.create_token
   end
 
   private
-  def save_img(img_id, imgDictionary, user_id)
+  def get_custom_user(token)
+    user_details_url = "https://api.instagram.com/v1/users/self/?access_token=#{token}"
+    response = HTTParty.get(user_details_url, :verify => false)
 
-    low_resolution = imgDictionary["low_resolution"]["url"]
-    thumbnail = imgDictionary["thumbnail"]["url"]
-    standard_resolution = imgDictionary["standard_resolution"]["url"]
+    data = response["data"]
+    id=data["id"]
+    username=data["username"]
 
-    Image.create(img_id: img_id,
-                 user_id: user_id,
-                 low_resolution: low_resolution,
-                 thumbnail: thumbnail,
-                 standard_resolution: standard_resolution)
+    return CustomToken.new(id, token, username)
   end
 
-  def get
-    # Rails.logger.debug "My debug log jhjhjj"
-    # puts "13246579"
-    # u= User.new
-    # u.handle="koko"
-    # render json: u
-  end
+
 end

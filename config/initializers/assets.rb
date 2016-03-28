@@ -11,4 +11,5 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( app.js )
 Rails.application.config.assets.precompile += %w( controllers/controllersModule.js )
-Rails.application.config.assets.precompile += %w( controllers/syncController.js )
+Rails.application.config.assets.precompile += %w( controllers/callbackController.js )
+Rails.application.config.assets.precompile += %w( controllers/imagesController.js )
