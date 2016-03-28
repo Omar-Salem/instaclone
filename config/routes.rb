@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   get '/' => 'home#index'
   get '/:username' => 'images#get'
+  get 'users/callback' => 'users#callback'
 
   get 'api/images/get_id/:username' => 'images#get_id'
   get 'api/images/:user_id' => 'images#get_images_by_user_id'
-  get 'api/users/callback' => 'users#callback'
   post 'api/users/get_user_details' => 'users#get_user_details'
   # post 'users/sync_media' => 'users#sync_media'
 

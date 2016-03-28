@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   def get_user_details
     token = params["token"]
 
-    AccessToken.create(token: token)
+    unless AccessToken.where(:token => token).present?
+      AccessToken.create(token: token)
+    end
 
     custom_user = get_custom_user(token)
     render text: custom_user.create_token

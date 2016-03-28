@@ -8,7 +8,7 @@ angular.module('controllers').controller(
         get_user_details(token);
 
         function get_user_details(token) {
-            $http.post('/users/get_user_details', {token: token}, {
+            $http.post('/api/users/get_user_details', {token: token}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'text/plain'
