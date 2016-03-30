@@ -21,18 +21,4 @@ angular.module('controllers').controller(
                 alert('error')
             });
         }
-
-        //function sync_media() {
-        //    $http.post('/users/sync_media', {}, {
-        //        headers: {
-        //            'Content-Type': 'application/json',
-        //            'Accept': 'application/json',
-        //            'token': localStorage.getItem("token")
-        //        }
-        //    }).then(function (response) {
-        //        //alert(response.data)
-        //    }, function (response) {
-        //        alert('error')
-        //    });
-        //}
     });
