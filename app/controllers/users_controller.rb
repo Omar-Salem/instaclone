@@ -35,8 +35,8 @@ class UsersController < ApplicationController
   end
 
   private
-  def load_services()
-    @sync_service = SyncService.new
+  def load_services(sync_service=SyncService.new)
+    @sync_service ||= sync_service
   end
 
 
