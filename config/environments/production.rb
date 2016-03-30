@@ -76,4 +76,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.insta_host = 'https://insta-clone-11111111111111.herokuapp.com'
 end
