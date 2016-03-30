@@ -1,8 +1,9 @@
 class HomeController < ApplicationController
+  STRING = "http://127.0.0.1:3000"
+  HOST=STRING+"/users/callback"
+  CLIENT_ID="ddc5629e25284f14a02604f268ae09c9"
+
   def index
-    string = "http://127.0.0.1:3000"
-    host=string+"/users/callback"
-    client_id="ddc5629e25284f14a02604f268ae09c9"
-    @url="https://instagram.com/oauth/authorize/?client_id=#{client_id}&redirect_uri=#{host}&response_type=token&scope=public_content"
+    @url="https://instagram.com/oauth/authorize/?client_id=#{CLIENT_ID}&redirect_uri=#{HOST}&response_type=token&scope=public_content"
   end
 end
