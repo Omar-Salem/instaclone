@@ -16,10 +16,10 @@ default: &default
   username: erlmwhduio2dv9nz
   password: dekdfjqtgi531jkg
   host: izm96dhhnwr2ieg0.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  database: soom14ykvk24ii9u
 
 development:
   <<: *default
-  database: soom14ykvk24ii9u
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
