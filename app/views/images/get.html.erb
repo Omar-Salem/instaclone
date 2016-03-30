@@ -1,8 +1,24 @@
-<html ng-app="app">
+<!DOCTYPE html>
+
+<html ng-app="app" lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Angular App</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body ng-controller="imagesController">
+
+
+<div class="container">
+  <div class="row" ng-repeat="row in images">
+    <div class="col-sm-2" ng-repeat="img in row">
+      <a href="{{img.href}}" class="thumbnail">
+        <img src="{{img.thumbnail}}" class="img-responsive">
+      </a>
+    </div>
+  </div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 <%= javascript_include_tag "app.js" %>
 <%= javascript_include_tag "controllers/controllersModule.js" %>

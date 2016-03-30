@@ -3,6 +3,8 @@ require "httparty"
 
 class UsersController < ApplicationController
 
+  before_filter :load_services
+
   def callback
   end
 
@@ -13,8 +15,11 @@ class UsersController < ApplicationController
       AccessToken.create(token: token)
     end
 
+    @sync_service.sync(token)
+
     custom_user = get_custom_user(token)
-    render text: custom_user.create_token
+    create_token = custom_user.create_token
+    render json: Hash["username" => custom_user.username, "token" => create_token]
   end
 
   private
@@ -27,6 +32,11 @@ class UsersController < ApplicationController
     username=data["username"]
 
     return CustomToken.new(id, token, username)
+  end
+
+  private
+  def load_services()
+    @sync_service = SyncService.new
   end
 
 

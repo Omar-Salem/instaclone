@@ -14,24 +14,25 @@ angular.module('controllers').controller(
                     'Accept': 'text/plain'
                 }
             }).then(function (response) {
-                localStorage.setItem("token", response.data);
-                //sync_media()
+                var data = response.data;
+                localStorage.setItem("token", data.token);
+                $window.location.href = '/' + data.username;
             }, function (response) {
                 alert('error')
             });
         }
 
-        function sync_media() {
-            $http.post('/users/sync_media', {}, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'token': localStorage.getItem("token")
-                }
-            }).then(function (response) {
-                //alert(response.data)
-            }, function (response) {
-                alert('error')
-            });
-        }
+        //function sync_media() {
+        //    $http.post('/users/sync_media', {}, {
+        //        headers: {
+        //            'Content-Type': 'application/json',
+        //            'Accept': 'application/json',
+        //            'token': localStorage.getItem("token")
+        //        }
+        //    }).then(function (response) {
+        //        //alert(response.data)
+        //    }, function (response) {
+        //        alert('error')
+        //    });
+        //}
     });
