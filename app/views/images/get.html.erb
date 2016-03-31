@@ -12,9 +12,19 @@
 <div class="container">
   <div class="row" ng-repeat="row in images">
     <div class="col-sm-2" ng-repeat="img in row">
-      <a href="{{img.href}}" class="thumbnail">
+      <a href="{{img.href?img.href:'#'}}" class="thumbnail">
         <img src="{{img.thumbnail}}" class="img-responsive">
       </a>
+      <div ng-if="img.editMode==false">
+        <button type="button" ng-click="img.beginEdit()">Edit link</button>
+      </div>
+      <div ng-if="img.editMode">
+        <form ng-submit="img.submit()">
+          <input type="url" ng-model="img.customHref">
+          <button type="submit">Save</button>
+          <button type="reset" ng-click="img.cancel()">Cancel</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

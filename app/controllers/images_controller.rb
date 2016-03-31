@@ -18,6 +18,16 @@ class ImagesController < ApplicationController
     render json: result
   end
 
+  def edit
+
+    # token = params["token"]
+    id = params["id"]
+    img=Image.find(id)
+    img.href = params["href"]
+    img.save()
+    render text: "koko"
+  end
+
   private
   def check_can_edit(params)
 
