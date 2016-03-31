@@ -13,10 +13,10 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: erlmwhduio2dv9nz
-  password: dekdfjqtgi531jkg
   host: izm96dhhnwr2ieg0.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
-  database: soom14ykvk24ii9u
+  username: flplbe82gu70pqrz
+  password: bowjbwz22phzs1s3
+  database: dn4a8uj24w1cnek5
 
 development:
   <<: *default
