@@ -19,13 +19,24 @@ class ImagesController < ApplicationController
   end
 
   def edit
+    token= request.headers['token']
+    valid, result= CustomToken.validate_token(token)
+    status=400
+    text='invalid token'
 
-    # token = params["token"]
-    id = params["id"]
-    img=Image.find(id)
-    img.href = params["href"]
-    img.save()
-    render text: "koko"
+    if valid
+      id = params["id"]
+      img=Image.find(id)
+
+      if result["userId"]==img.user_id
+        img.href = params["href"]
+        img.save()
+        status= 200
+        text= img.href
+      end
+
+    end
+    render status: status, text: text
   end
 
   private

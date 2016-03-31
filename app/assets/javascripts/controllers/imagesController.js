@@ -28,10 +28,11 @@ angular.module('controllers').controller(
                 }
             }).then(function (response) {
                 var data = response.data;
-                data.images = addExtraAttributes(data.images);
-                //debugger;
-                $scope.images = putInMatrix(data.images);
-                $scope.canEdit = data.can_edit;
+                $scope.images = data.images;
+                if (data.can_edit) {
+                    data.images = addExtraAttributes(data.images);
+                }
+                $scope.matrix = putInMatrix(data.images);
             }, function (response) {
                 alert('error');
             });
@@ -53,6 +54,7 @@ angular.module('controllers').controller(
                     },
                     cancel: function () {
                         obj.editMode = false;
+                        obj.customHref = obj.href;
                     }
                 });
             }
@@ -85,8 +87,30 @@ angular.module('controllers').controller(
                     'token': localStorage.getItem("token")
                 }
             }).then(function (response) {
+                if (response.status == 200) {
+                    var image = binarySearch($scope.images, id, 0, $scope.images.length);
+                    image.href = href;
+                }
             }, function (response) {
                 alert('error')
             });
+        }
+
+        function binarySearch(arr, key, low, high) {
+            while (low < high) {
+                var middle = (low + high) / 2;
+
+                var middleId = arr[middle].id;
+
+                if (middleId == key) {
+                    return arr[middle];
+                }
+                else if (key > middleId) {
+                    low = middleId + 1;
+                } else {
+                    high = middle - 1;
+                }
+            }
+            return null;
         }
     });
