@@ -97,20 +97,19 @@ angular.module('controllers').controller(
         }
 
         function binarySearch(arr, key, low, high) {
-            while (low < high) {
-                var middle = (low + high) / 2;
+            while (low <= high) {
+                var middle = ~~((low + high) / 2);
 
-                var middleId = arr[middle].id;
-
-                if (middleId == key) {
+                if (arr[middle].id == key) {
                     return arr[middle];
                 }
-                else if (key > middleId) {
-                    low = middleId + 1;
+                else if (key > arr[middle].id) {
+                    low = middle + 1;
                 } else {
                     high = middle - 1;
                 }
             }
-            return null;
+
+            alert('Error:could not find object');
         }
     });
